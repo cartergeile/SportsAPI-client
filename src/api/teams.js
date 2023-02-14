@@ -25,3 +25,15 @@ export const createTeam = (user, newTeam) => {
 }
 
 // UPDATE
+
+// DELETE
+export const removeTeam = (user, teamId) => {
+  return axios({
+    url: `${apiUrl}/teams/${teamId}`,
+    method: 'DELETE',
+    headers: {
+      Authorization: `Token token=${user.token}`
+    }
+  })
+}
+

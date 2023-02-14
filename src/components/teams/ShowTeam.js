@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import { Container, Card, Button } from 'react-bootstrap'
-import { getOneTeam } from '../../api/teams'
+import { getOneTeam, removeTeam } from '../../api/teams'
 import messages from '../shared/AutoDismissAlert/messages'
 import LoadingScreen from '../shared/LoadingScreen'
 
@@ -13,6 +13,7 @@ const ShowTeam = (props) => {
   const [team, setTeam] = useState(null)
 
   const { id } = useParams()
+  const navigate = useNavigate()
 
   const { user, msgAlert } = props
   
@@ -27,6 +28,26 @@ const ShowTeam = (props) => {
         })
       })
   }, [])
+
+  //remove team function
+  const setTeamFree = () => {
+    removeTeam(user, team.id)
+      .then(() => {
+        msgAlert({
+          heading: 'Success',
+          message: messages.removeTeamSuccess,
+          variant: 'success'
+        })
+      })
+      .then(() => navigate('/'))
+      .catch(err => {
+        msgAlert({
+          heading: 'Error',
+          message: messages.removeTeamFailure,
+          variant: 'danger'
+        })
+      })
+  }
 
   if (!team) {
     return <LoadingScreen />
@@ -44,6 +65,19 @@ const ShowTeam = (props) => {
               <div><small>Joinable: {team.joinable ? 'yes' : 'no'}</small></div>
             </Card.Text>
           </Card.Body>
+          <Card.Footer>
+            {
+              team.owner && user && team.owner.id === user.id
+              ?
+              <>
+                <Button className='m-2' variant='danger' onClick={() => setTeamFree()}>
+                Remove {team.name}
+                </Button>
+              </>
+              :
+              null
+            }
+          </Card.Footer>
         </Card>
       </Container>
     </>

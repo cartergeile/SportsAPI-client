@@ -9,7 +9,8 @@ const messages = {
 	getTeamsFailure: 'Failed to retrieve teams',
 	createTeamSuccess: 'New team has been created',
 	createTeamFailure: 'Failed to create new team, please try again',
-
+	removeTeamSuccess: 'This team no longer exists!',
+	removeTeamFailure: 'Something went wrong, please try again',
 }
 
 module.exports = messages
