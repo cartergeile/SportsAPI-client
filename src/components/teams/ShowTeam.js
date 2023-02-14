@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 import { Container, Card, Button } from 'react-bootstrap'
 import { getOneTeam } from '../../api/teams'
 import messages from '../shared/AutoDismissAlert/messages'
+import LoadingScreen from '../shared/LoadingScreen'
 
 // get teams id from the route parameters
 // make a request to the api
@@ -28,7 +29,7 @@ const ShowTeam = (props) => {
   }, [])
 
   if (!team) {
-    return <p>Loading...</p>
+    return <LoadingScreen />
   }
 
   return (

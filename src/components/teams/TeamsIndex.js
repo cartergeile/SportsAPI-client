@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import Card from 'react-bootstrap/Card'
 import { Link } from 'react-router-dom'
+import LoadingScreen from '../shared/LoadingScreen'
 
 // api function from api file
 import { getAllTeams } from '../../api/teams'
@@ -42,7 +43,7 @@ const TeamsIndex = (props) => {
     return <p>Error!</p>
   }
   if(!teams) {
-    return <p>Loading... please wait</p>
+    return <LoadingScreen />
   } else if (teams.length === 0) {
     return <p>No teams yet, go add some!</p>
   }
