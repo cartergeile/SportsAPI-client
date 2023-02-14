@@ -34,7 +34,7 @@ const ShowTeam = (props) => {
 
   return (
     <>
-      <Container>
+      <Container className='m-2'>
         <Card>
           <Card.Header>{ team.fullTitle }</Card.Header>
           <Card.Body>

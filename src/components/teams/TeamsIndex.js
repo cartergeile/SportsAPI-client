@@ -56,6 +56,11 @@ const TeamsIndex = (props) => {
         <Card.Text>
           <Link to={`/teams/${team.id}`} className='btn btn-dark'>View { team.name }</Link>
         </Card.Text>
+        { team.owner ?
+        <Card.Footer>
+          Owner: {team.owner.email} 
+        </Card.Footer>
+        : null }
       </Card.Body>
     </Card>
   ))

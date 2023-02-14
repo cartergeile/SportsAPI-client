@@ -20,6 +20,8 @@ export const createTeam = (user, newTeam) => {
     headers: {
       Authorization: `Token token=${user.token}`
     },
-    data: { teams: newTeam}
+    data: { team: newTeam }
   })
 }
+
+// UPDATE

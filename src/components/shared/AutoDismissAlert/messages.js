@@ -7,7 +7,9 @@ const messages = {
 	changePasswordSuccess: 'Password changed successfully!',
 	changePasswordFailure:'Failed to change passwords. Check your old password and try again.',
 	getTeamsFailure: 'Failed to retrieve teams',
-	
+	createTeamSuccess: 'New team has been created',
+	createTeamFailure: 'Failed to create new team, please try again',
+
 }
 
 module.exports = messages
