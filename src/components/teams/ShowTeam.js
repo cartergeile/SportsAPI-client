@@ -5,10 +5,17 @@ import { getOneTeam, removeTeam, updateTeam } from '../../api/teams'
 import messages from '../shared/AutoDismissAlert/messages'
 import LoadingScreen from '../shared/LoadingScreen'
 import EditTeamModal from './EditTeamModal'
+import ShowPlayer from '../players/ShowPlayer'
 
 // get teams id from the route parameters
 // make a request to the api
 // render the data when a team is retrieved from api
+
+const playerCardContainerLayout = {
+  display: 'flex',
+  justifyContent: 'center',
+  flexFlow: 'row wrap'
+}
 
 const ShowTeam = (props) => {
   const [team, setTeam] = useState(null)
@@ -52,6 +59,18 @@ const ShowTeam = (props) => {
       })
   }
 
+  let playerCards
+  if (team) {
+    if (team.players.length > 0) {
+      playerCards = team.players.map(player => (
+        <ShowPlayer 
+          key={player.id}
+          player={player}
+        />
+      ))
+    }
+  }
+
   if (!team) {
     return <LoadingScreen />
   }
@@ -85,6 +104,10 @@ const ShowTeam = (props) => {
             }
           </Card.Footer>
         </Card>
+        <h2 style={{textAlign : 'center'}} >Players</h2>
+      </Container>     
+      <Container className='m-2' style={playerCardContainerLayout}>      
+        {playerCards}
       </Container>
       <EditTeamModal 
         user={user}
