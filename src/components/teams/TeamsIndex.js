@@ -31,7 +31,7 @@ const TeamsIndex = (props) => {
       .catch(err => {
         msgAlert({
           heading: 'Error getting teams',
-          message: 'Could not find any teams',
+          message: messages.getTeamsFailure,
           variant: 'danger'
         })
         setError(true)
