@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { Container, Card, Button } from 'react-bootstrap'
-import { getOneTeam, removeTeam } from '../../api/teams'
+import { getOneTeam, removeTeam, updateTeam } from '../../api/teams'
 import messages from '../shared/AutoDismissAlert/messages'
 import LoadingScreen from '../shared/LoadingScreen'
+import EditTeamModal from './EditTeamModal'
 
 // get teams id from the route parameters
 // make a request to the api
@@ -11,6 +12,8 @@ import LoadingScreen from '../shared/LoadingScreen'
 
 const ShowTeam = (props) => {
   const [team, setTeam] = useState(null)
+  const [editModalShow, setEditModalShow] = useState(false)
+  const [updated, setUpdated] = useState(false)
 
   const { id } = useParams()
   const navigate = useNavigate()
@@ -27,7 +30,7 @@ const ShowTeam = (props) => {
           variant: 'danger'
         })
       })
-  }, [])
+  }, [updated])
 
   //remove team function
   const setTeamFree = () => {
@@ -73,6 +76,9 @@ const ShowTeam = (props) => {
                 <Button className='m-2' variant='danger' onClick={() => setTeamFree()}>
                 Remove {team.name}
                 </Button>
+                <Button className='m-2' variant='warning' onClick={() => setEditModalShow(true)}>
+                Edit {team.name}
+                </Button>
               </>
               :
               null
@@ -80,6 +86,15 @@ const ShowTeam = (props) => {
           </Card.Footer>
         </Card>
       </Container>
+      <EditTeamModal 
+        user={user}
+        show={editModalShow}
+        handleClose={() => setEditModalShow(false)}
+        updateTeam={updateTeam}
+        msgAlert={msgAlert}
+        triggerRefresh={() => setUpdated(prev => !prev)}
+        team={team}
+      />
     </>
   )
 }
