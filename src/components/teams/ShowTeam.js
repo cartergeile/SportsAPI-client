@@ -68,6 +68,10 @@ const ShowTeam = (props) => {
         <ShowPlayer 
           key={player.id}
           player={player}
+          user={user}
+          team={team}
+          msgAlert={msgAlert}
+          triggerRefresh={() => setUpdated(prev => !prev)}
         />
       ))
     }

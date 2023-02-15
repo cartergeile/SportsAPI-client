@@ -4,7 +4,7 @@ import PlayerForm from '../shared/PlayerForm'
 import { createPlayer } from '../../api/players'
 
 const NewPlayerModal = (props) => {
-  const { user, team, show, handleClose, msgAlert, triggerRefresh } = props
+  const {  team, show, handleClose, msgAlert, triggerRefresh } = props
 
   const [player, setPlayer] = useState({})
 
