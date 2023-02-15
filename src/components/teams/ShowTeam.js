@@ -6,6 +6,7 @@ import messages from '../shared/AutoDismissAlert/messages'
 import LoadingScreen from '../shared/LoadingScreen'
 import EditTeamModal from './EditTeamModal'
 import ShowPlayer from '../players/ShowPlayer'
+import NewPlayerModal from '../players/NewPlayerModal'
 
 // get teams id from the route parameters
 // make a request to the api
@@ -20,6 +21,7 @@ const playerCardContainerLayout = {
 const ShowTeam = (props) => {
   const [team, setTeam] = useState(null)
   const [editModalShow, setEditModalShow] = useState(false)
+  const [playerModalShow, setPlayerModalShow] = useState(false)
   const [updated, setUpdated] = useState(false)
 
   const { id } = useParams()
@@ -88,6 +90,9 @@ const ShowTeam = (props) => {
             </Card.Text>
           </Card.Body>
           <Card.Footer>
+            <Button className='m-2' variant='info' onClick={() => setPlayerModalShow(true)}>
+              Give {team.name} a player!
+            </Button>
             {
               team.owner && user && team.owner.id === user.id
               ?
@@ -117,6 +122,14 @@ const ShowTeam = (props) => {
         msgAlert={msgAlert}
         triggerRefresh={() => setUpdated(prev => !prev)}
         team={team}
+      />
+      <NewPlayerModal 
+        user={user}
+        team={team}
+        show={playerModalShow}
+        handleClose={() => setPlayerModalShow(false)}
+        msgAlert={msgAlert}
+        triggerRefresh={() => setUpdated(prev => !prev)}
       />
     </>
   )
